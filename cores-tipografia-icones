@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard App Inatel</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Arimo:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Dashboard</h1>
+            <button id="theme-toggle">
+                <span class="material-icons-outlined">brightness_6</span>
+            </button>
+            <div id="theme-menu" class="theme-menu hidden">
+                <button class="theme-btn" data-theme="light">Claro</button>
+                <button class="theme-btn" data-theme="dark">Escuro</button>
+            </div>
+        </div>
+        <div class="content">
+            <div class="widget">Widget 1</div>
+            <div class="widget">Widget 2</div>
+            <div class="widget">Widget 3</div>
+            <div class="widget">Widget 4</div>
+        </div>
+        <div class="footer">
+            <svg class="svg_logo_inatel" xmlns="http://www.w3.org/2000/svg" viewBox="100 150 390 116">
+                <path class="path_logo" d="M127.455,156.988h21.287l-21.859,102.835H105.69L127.455,156.988L127.455,156.988z M225.618,208.048..."></path>
+            </svg>
+            <p>Rodapé</p>
+        </div>
+    </div>
+</body>
+</html>
