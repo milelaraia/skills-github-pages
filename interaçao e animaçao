@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrossel de Eventos</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .carousel {
+            display: flex; /* faça essa alteração */
+            transition: transform 0.5s ease-in-out; /* inclua a animação */
+        }
+    </style>
+</head>
+<body>
+    <div class="carousel-container" id="carouselContainer">
+        <div class="carousel" id="carousel">
+            <!-- Os cards serão inseridos dinamicamente via JS -->
+        </div>
+        <button id="prevBtn">❮</button>
+        <button id="nextBtn">❯</button>
+    </div>
+
+    <script>
+        const eventos = [
+            {
+                id: 1,
+                title: 'Semana do Software 2025',
+                date: '12/05',
+                time: '10:00',
+                location: 'Salão de Eventos',
+                type: 'tech',
+                description: 'Uma semana inteira dedicada à tecnologia e inovação, com palestras, workshops e hackathons.',
+                image: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&q=80&w=800&h=400'
+            },
+            {
+                id: 2,
+                title: 'Workshop de IoT',
+                date: '12/01',
+                time: '08:00',
+                location: 'Laboratório CS&I',
+                type: 'tech',
+                description: 'Workshop prático sobre Internet das Coisas e suas aplicações na indústria 4.0.',
+                image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=800&h=400'
+            },
+            {
+                id: 3,
+                title: 'Festa dos Alunos 2025',
+                date: '18/05',
+                time: '19:00',
+                location: 'Área Esportiva do Inatel',
+                type: 'cultural',
+                description: 'Venha comemorar a melhor Festa dos Alunos de todos os tempos!',
+                image: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&q=80&w=800&h=400'
+            },
+            {
+                id: 4,
+                title: 'Feira de Oportunidades',
+                date: '04/05',
+                time: '10:00',
+                location: 'Salão de Eventos',
+                type: 'academic',
+                description: 'Venha conhecer empresas e projetos com destaque na área da engenharia.',
+                image: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80&w=800&h=400'
+            }
+        ];
+
+        const carousel = document.getElementById('carousel');
+        let currentIndex = 0;
+        let autoSlideInterval;
+
+        function renderCards() {
+            eventos.forEach(event => {
+                const card = document.createElement('div');
+                card.classList.add('card');
+                card.innerHTML = `
+                    <img src="${event.image}" alt="${event.title}">
+                    <div class="info">
+                        <h3>${event.title}</h3>
+                        <p>${event.description}</p>
+                        <p><span class="icon">📅</span> ${event.date} às ${event.time} <span class="icon">📍</span> ${event.location}</p>
+                    </div>
+                `;
+                carousel.appendChild(card);
+            });
+        }
+
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % eventos.length;
+            updateCarousel();
+        }
+
+        function prevSlide() {
+            currentIndex = (currentIndex - 1 + eventos.length) % eventos.length;
+            updateCarousel();
+        }
+
+        function updateCarousel() {
+            const offset = -currentIndex * 100;
+            carousel.style.transform = `translateX(${offset}%)`;
+        }
+
+        function startAutoSlide() {
+            autoSlideInterval = setInterval(nextSlide, 5000);
+        }
+
+        function stopAutoSlide() {
+            clearInterval(autoSlideInterval);
+        }
+
+        document.getElementById('nextBtn').addEventListener('click', nextSlide);
+        document.getElementById('prevBtn').addEventListener('click', prevSlide);
+
+        const carouselContainer = document.getElementById('carouselContainer');
+        carouselContainer.addEventListener('mouseenter', stopAutoSlide);
+        carouselContainer.addEventListener('mouseleave', startAutoSlide);
+
+        renderCards();
+        startAutoSlide();
+    </script>
+</body>
+</html>
